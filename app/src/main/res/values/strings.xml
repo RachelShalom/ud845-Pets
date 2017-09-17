@@ -60,6 +60,8 @@
     <string name="gender_female">Female</string>
     <!-- A toast message that pet is saves succesfuly -->
     <string name="pet_save">Pet Saved</string>
+    <string name="pet_update">Pet is updated</string>
+    <string name="pet_update_failed">Pet is update has failed:(</string>
     <!-- Toast message in editor when new pet has failed to be inserted [CHAR LIMIT=NONE] -->
     <string name="editor_insert_pet_failed">Error with saving pet</string>
     <!-- Title text for the empty view, which describes the empty dog house image [CHAR LIMIT=50] -->
@@ -67,4 +69,7 @@
 
     <!-- Subtitle text for the empty view that prompts the user to add a pet [CHAR LIMIT=50] -->
     <string name="empty_view_subtitle_text">Get started by adding a pet</string>
+    <string name="edit_pet">Edit Pet</string>
+    <string name="insert_pet">Insert New Pet</string>
+
 </resources>

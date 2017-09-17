@@ -10,9 +10,11 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.android.pets.data.PetDbHelper;
@@ -44,6 +46,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
             public void onClick(View view) {
                 Intent intent = new Intent(CatalogActivity.this, EditorActivity.class);
                 startActivity(intent);
+
             }
         });
         // To access our database, we instantiate our subclass of SQLiteOpenHelper
@@ -56,6 +59,19 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         mPetAdapter = new PetCursorAdapter(this, null);
         // Attach cursor adapter to the ListView
         petList.setAdapter(mPetAdapter);
+        // open en edit mode for each item in the EditorActivity
+        petList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(CatalogActivity.this, EditorActivity.class);
+                Uri Item_uri = Uri.withAppendedPath(PetEntry.CONTENT_URI, String.valueOf(id));
+                Log.e("URI is ", String.valueOf(Item_uri));
+                //set the item uri to the intent
+                intent.setData(Item_uri);
+                startActivity(intent);
+
+            }
+        });
          /*
          * Initializes the CursorLoader. The URL_LOADER value is eventually passed
          * to onCreateLoader().
@@ -108,13 +124,13 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 
         switch (id) {
             case URL_LOADER:
-                // Define a projection that specifies which columns from the database
+                // Define a projection that specifies which columns from the database to query
                 return new CursorLoader(this, PetEntry.CONTENT_URI, mProjection, null, null, null);
             default:
                 return null;
         }
     }
-
+     //the data- cursor is passed in to the adapter. this swaps the older cursor with a new one
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         mPetAdapter.swapCursor(data);
