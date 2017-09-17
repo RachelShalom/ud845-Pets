@@ -194,7 +194,7 @@ public class PetProvider extends ContentProvider {
             return 0;
         }
 
-        // Gets the data repository in write mode
+        /// Gets the data repository in write mode
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
         // Perform the update on the database and get the number of rows affected
         int rowsUpdated = db.update(PetEntry.TABLE_NAME, values, selection, selectionArgs);
