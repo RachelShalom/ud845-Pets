@@ -226,6 +226,7 @@ public class PetProvider extends ContentProvider {
             rowsDeleted = database.delete(PetEntry.TABLE_NAME, selection, selectionArgs);
             if(rowsDeleted!=0){
                 getContext().getContentResolver().notifyChange(uri,null);
+                return rowsDeleted;
             }
         case PET_ID:
             // Delete a single row given by the ID in the URI

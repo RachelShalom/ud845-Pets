@@ -113,7 +113,8 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
                 return true;
             // Respond to a click on the "Delete all entries" menu option
             case R.id.action_delete_all_entries:
-                // Do nothing for now
+                int rowsDeleted = getContentResolver().delete(PetEntry.CONTENT_URI,null,null);
+                Log.v("CatalogActivity", rowsDeleted + " rows deleted from pet database");
                 return true;
         }
         return super.onOptionsItemSelected(item);
